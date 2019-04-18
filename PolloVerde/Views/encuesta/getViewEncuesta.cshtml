@@ -1,0 +1,119 @@
+﻿<div class="container">
+    <br />
+    <div class="row">
+        <div class="col">
+            Cliente:  @Html.DropDownList("listaClientes", ViewBag.lista as SelectList, htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+
+            <ul class="list-group">
+                @foreach (var pregunta in ViewBag.preguntas)
+                {
+                    if (pregunta.id_pregunta_encuesta < ViewBag.ultimoId)
+                    {
+                        <li class="list-group-item">@pregunta.descripcion_pregunta</li>
+                        <li class="list-group-item">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="@pregunta.id_pregunta_encuesta" value="Malo">
+                                <label class="form-check-label">
+                                    Malo
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="@pregunta.id_pregunta_encuesta" value="Regular">
+                                <label class="form-check-label">
+                                    Regular
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="@pregunta.id_pregunta_encuesta" value="Bueno">
+                                <label class="form-check-label">
+                                    Bueno
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="@pregunta.id_pregunta_encuesta" value="Excelente">
+                                <label class="form-check-label">
+                                    Excelente
+                                </label>
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="list-group-item">@pregunta.descripcion_pregunta</li>
+                        <li class="list-group-item">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="@pregunta.id_pregunta_encuesta" value="Si">
+                                <label class="form-check-label">
+                                    Si
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="@pregunta.id_pregunta_encuesta" value="No">
+                                <label class="form-check-label">
+                                    No
+                                </label>
+                            </div>
+                        </li>
+                    }
+                }
+            </ul>
+            <div><button class="btn btn-success" onclick="llamarDatos()">Guardar Encuesta</button></div>
+        </div>
+        <h2>¡SÍGUENOS EN NUESTRAS REDES SOCIALES!</h2>
+        <a href="https://www.facebook.com"><i class="fab fa-facebook-f">            /POLLOVERDEGUATE</i></a><br /><br />
+        <a href="https://www.instagram.com"><i class="fab fa-instagram">            /POLLOSALUDABLEGUATE</i></a><br /><br />
+        <a href="https://www.twitter.com"><i class="fab fa-twitter">                 /POLLOVERDEGUATE</i></a>
+    </div>
+</div>
+
+@section scripts{
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/brands.css" integrity="sha384-n9+6/aSqa9lBidZMRCQHTHKJscPq6NW4pCQBiMmHdUCvPN8ZOg2zJJTkC7WIezWv" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/fontawesome.css" integrity="sha384-vd1e11sR28tEK9YANUtpIOdjGW14pS87bUBuOIoBILVWLFnS+MCX9T6MMf0VdPGq" crossorigin="anonymous">
+
+    <script>
+
+        llamarDatos = function() {
+
+            var lista = @Html.Raw(Json.Encode(ViewBag.preguntas));
+            let listaRespuestas = [];
+
+
+            console.log(lista);
+
+            for (i = 0; i < lista.length; i++) {
+                var res = $(`input:radio[name = "${lista[i].id_pregunta_encuesta}"]:checked`).val();
+                listaRespuestas.push({ id_pregunta: lista[i].id_pregunta_encuesta, descripcion_respuesta: res });
+            }
+            console.log(listaRespuestas);
+
+            var idCliente = $('select[name=listaClientes]').val();
+
+
+            enviarDatos(idCliente, listaRespuestas);
+        }
+
+
+        enviarDatos = function (id, listaRespuestas) {
+
+            $(function () {
+                $.ajax({
+                    url: '/encuesta/guardarEncuesta',
+                    data: { id_cliente: id, respuestas: listaRespuestas },
+                    type: 'POST'
+                }).done(function (response) {
+                    window.location.reload(true);
+                }).fail(function () {
+                    alert('POR FAVOR COMPLETE LA ENCUESTA');
+                });
+            })
+
+        }
+
+    </script>
+}

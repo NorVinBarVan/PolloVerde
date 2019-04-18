@@ -1,0 +1,963 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PolloVerdeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_cliente">
+          <Key>
+            <PropertyRef Name="id_cliente" />
+          </Key>
+          <Property Name="id_cliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nit_cliente" Type="int" Nullable="false" />
+          <Property Name="nombre_cliente" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="direccion_cliente" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_combo">
+          <Key>
+            <PropertyRef Name="id_combo" />
+          </Key>
+          <Property Name="id_combo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion_combo" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_detalle_factura">
+          <Key>
+            <PropertyRef Name="id_detalle_factura" />
+          </Key>
+          <Property Name="id_detalle_factura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_factura" Type="int" Nullable="false" />
+          <Property Name="id_producto" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_encuesta">
+          <Key>
+            <PropertyRef Name="id_encuesta" />
+          </Key>
+          <Property Name="id_encuesta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha_encuesta" Type="datetime" Nullable="false" />
+          <Property Name="id_cliente" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_factura">
+          <Key>
+            <PropertyRef Name="id_factura" />
+          </Key>
+          <Property Name="id_factura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+          <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+          <Property Name="descuento_aplicado" Type="int" Nullable="false" />
+          <Property Name="id_tipo_pago" Type="int" Nullable="false" />
+          <Property Name="id_cliente" Type="int" Nullable="false" />
+          <Property Name="id_sucursal" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_menu">
+          <Key>
+            <PropertyRef Name="id_menu" />
+          </Key>
+          <Property Name="id_menu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion_menu" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_producto" Type="int" Nullable="false" />
+          <Property Name="id_combo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_pregunta_encuesta">
+          <Key>
+            <PropertyRef Name="id_pregunta_encuesta" />
+          </Key>
+          <Property Name="id_pregunta_encuesta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion_pregunta" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_producto">
+          <Key>
+            <PropertyRef Name="id_producto" />
+          </Key>
+          <Property Name="id_producto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_producto" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="descripcion_producto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="precio_producto" Type="int" Nullable="false" />
+          <Property Name="cantidad_producto" Type="int" Nullable="false" />
+          <Property Name="id_tipo_producto" Type="int" Nullable="false" />
+          <Property Name="id_proveedor" Type="int" Nullable="false" />
+          <Property Name="id_sucursal" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_proveedor">
+          <Key>
+            <PropertyRef Name="id_proveedor" />
+          </Key>
+          <Property Name="id_proveedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_proveedor" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="telefono_proveedor" Type="int" Nullable="false" />
+          <Property Name="direccion_proveedor" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="id_sucursal" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_region">
+          <Key>
+            <PropertyRef Name="id_region" />
+          </Key>
+          <Property Name="id_region" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_region" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_respuesta_encuesta">
+          <Key>
+            <PropertyRef Name="id_respuesta_encuesta" />
+          </Key>
+          <Property Name="id_respuesta_encuesta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion_respuesta" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="id_encuesta" Type="int" Nullable="false" />
+          <Property Name="id_pregunta_encuesta" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_sucursal">
+          <Key>
+            <PropertyRef Name="id_sucursal" />
+          </Key>
+          <Property Name="id_sucursal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion_sucursal" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="id_region" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_tipo_pago">
+          <Key>
+            <PropertyRef Name="id_tipo_pago" />
+          </Key>
+          <Property Name="id_tipo_pago" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion_tipo_pago" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_tipo_producto">
+          <Key>
+            <PropertyRef Name="id_tipo_producto" />
+          </Key>
+          <Property Name="id_tipo_producto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion_tipo_producto" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tb_detalle_factura_tb_factura">
+          <End Role="tb_factura" Type="Self.tb_factura" Multiplicity="1" />
+          <End Role="tb_detalle_factura" Type="Self.tb_detalle_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_factura">
+              <PropertyRef Name="id_factura" />
+            </Principal>
+            <Dependent Role="tb_detalle_factura">
+              <PropertyRef Name="id_factura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_detalle_factura_tb_producto">
+          <End Role="tb_producto" Type="Self.tb_producto" Multiplicity="1" />
+          <End Role="tb_detalle_factura" Type="Self.tb_detalle_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_producto">
+              <PropertyRef Name="id_producto" />
+            </Principal>
+            <Dependent Role="tb_detalle_factura">
+              <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_encuesta_tb_cliente">
+          <End Role="tb_cliente" Type="Self.tb_cliente" Multiplicity="1" />
+          <End Role="tb_encuesta" Type="Self.tb_encuesta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_cliente">
+              <PropertyRef Name="id_cliente" />
+            </Principal>
+            <Dependent Role="tb_encuesta">
+              <PropertyRef Name="id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_factura_tb_cliente">
+          <End Role="tb_cliente" Type="Self.tb_cliente" Multiplicity="1" />
+          <End Role="tb_factura" Type="Self.tb_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_cliente">
+              <PropertyRef Name="id_cliente" />
+            </Principal>
+            <Dependent Role="tb_factura">
+              <PropertyRef Name="id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_factura_tb_sucursal">
+          <End Role="tb_sucursal" Type="Self.tb_sucursal" Multiplicity="1" />
+          <End Role="tb_factura" Type="Self.tb_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_sucursal">
+              <PropertyRef Name="id_sucursal" />
+            </Principal>
+            <Dependent Role="tb_factura">
+              <PropertyRef Name="id_sucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_factura_tb_tipo_pago">
+          <End Role="tb_tipo_pago" Type="Self.tb_tipo_pago" Multiplicity="1" />
+          <End Role="tb_factura" Type="Self.tb_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_tipo_pago">
+              <PropertyRef Name="id_tipo_pago" />
+            </Principal>
+            <Dependent Role="tb_factura">
+              <PropertyRef Name="id_tipo_pago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_menu_tb_combo">
+          <End Role="tb_combo" Type="Self.tb_combo" Multiplicity="1" />
+          <End Role="tb_menu" Type="Self.tb_menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_combo">
+              <PropertyRef Name="id_combo" />
+            </Principal>
+            <Dependent Role="tb_menu">
+              <PropertyRef Name="id_combo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_menu_tb_producto">
+          <End Role="tb_producto" Type="Self.tb_producto" Multiplicity="1" />
+          <End Role="tb_menu" Type="Self.tb_menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_producto">
+              <PropertyRef Name="id_producto" />
+            </Principal>
+            <Dependent Role="tb_menu">
+              <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_producto_tb_proveedor">
+          <End Role="tb_proveedor" Type="Self.tb_proveedor" Multiplicity="1" />
+          <End Role="tb_producto" Type="Self.tb_producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_proveedor">
+              <PropertyRef Name="id_proveedor" />
+            </Principal>
+            <Dependent Role="tb_producto">
+              <PropertyRef Name="id_proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_producto_tb_sucursal">
+          <End Role="tb_sucursal" Type="Self.tb_sucursal" Multiplicity="1" />
+          <End Role="tb_producto" Type="Self.tb_producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_sucursal">
+              <PropertyRef Name="id_sucursal" />
+            </Principal>
+            <Dependent Role="tb_producto">
+              <PropertyRef Name="id_sucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_producto_tb_tipo_producto">
+          <End Role="tb_tipo_producto" Type="Self.tb_tipo_producto" Multiplicity="1" />
+          <End Role="tb_producto" Type="Self.tb_producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_tipo_producto">
+              <PropertyRef Name="id_tipo_producto" />
+            </Principal>
+            <Dependent Role="tb_producto">
+              <PropertyRef Name="id_tipo_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_proveedor_tb_sucursal">
+          <End Role="tb_sucursal" Type="Self.tb_sucursal" Multiplicity="1" />
+          <End Role="tb_proveedor" Type="Self.tb_proveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_sucursal">
+              <PropertyRef Name="id_sucursal" />
+            </Principal>
+            <Dependent Role="tb_proveedor">
+              <PropertyRef Name="id_sucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_respuesta_encuesta_tb_encuesta">
+          <End Role="tb_encuesta" Type="Self.tb_encuesta" Multiplicity="1" />
+          <End Role="tb_respuesta_encuesta" Type="Self.tb_respuesta_encuesta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_encuesta">
+              <PropertyRef Name="id_encuesta" />
+            </Principal>
+            <Dependent Role="tb_respuesta_encuesta">
+              <PropertyRef Name="id_encuesta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_respuesta_encuesta_tb_pregunta_encuesta">
+          <End Role="tb_pregunta_encuesta" Type="Self.tb_pregunta_encuesta" Multiplicity="1" />
+          <End Role="tb_respuesta_encuesta" Type="Self.tb_respuesta_encuesta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_pregunta_encuesta">
+              <PropertyRef Name="id_pregunta_encuesta" />
+            </Principal>
+            <Dependent Role="tb_respuesta_encuesta">
+              <PropertyRef Name="id_pregunta_encuesta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_sucursal_tb_region">
+          <End Role="tb_region" Type="Self.tb_region" Multiplicity="1" />
+          <End Role="tb_sucursal" Type="Self.tb_sucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_region">
+              <PropertyRef Name="id_region" />
+            </Principal>
+            <Dependent Role="tb_sucursal">
+              <PropertyRef Name="id_region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PolloVerdeModelStoreContainer">
+          <EntitySet Name="tb_cliente" EntityType="Self.tb_cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_combo" EntityType="Self.tb_combo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_detalle_factura" EntityType="Self.tb_detalle_factura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_encuesta" EntityType="Self.tb_encuesta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_factura" EntityType="Self.tb_factura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_menu" EntityType="Self.tb_menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_pregunta_encuesta" EntityType="Self.tb_pregunta_encuesta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_producto" EntityType="Self.tb_producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_proveedor" EntityType="Self.tb_proveedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_region" EntityType="Self.tb_region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_respuesta_encuesta" EntityType="Self.tb_respuesta_encuesta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_sucursal" EntityType="Self.tb_sucursal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_tipo_pago" EntityType="Self.tb_tipo_pago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_tipo_producto" EntityType="Self.tb_tipo_producto" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tb_detalle_factura_tb_factura" Association="Self.FK_tb_detalle_factura_tb_factura">
+            <End Role="tb_factura" EntitySet="tb_factura" />
+            <End Role="tb_detalle_factura" EntitySet="tb_detalle_factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_detalle_factura_tb_producto" Association="Self.FK_tb_detalle_factura_tb_producto">
+            <End Role="tb_producto" EntitySet="tb_producto" />
+            <End Role="tb_detalle_factura" EntitySet="tb_detalle_factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_encuesta_tb_cliente" Association="Self.FK_tb_encuesta_tb_cliente">
+            <End Role="tb_cliente" EntitySet="tb_cliente" />
+            <End Role="tb_encuesta" EntitySet="tb_encuesta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_factura_tb_cliente" Association="Self.FK_tb_factura_tb_cliente">
+            <End Role="tb_cliente" EntitySet="tb_cliente" />
+            <End Role="tb_factura" EntitySet="tb_factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_factura_tb_sucursal" Association="Self.FK_tb_factura_tb_sucursal">
+            <End Role="tb_sucursal" EntitySet="tb_sucursal" />
+            <End Role="tb_factura" EntitySet="tb_factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_factura_tb_tipo_pago" Association="Self.FK_tb_factura_tb_tipo_pago">
+            <End Role="tb_tipo_pago" EntitySet="tb_tipo_pago" />
+            <End Role="tb_factura" EntitySet="tb_factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_menu_tb_combo" Association="Self.FK_tb_menu_tb_combo">
+            <End Role="tb_combo" EntitySet="tb_combo" />
+            <End Role="tb_menu" EntitySet="tb_menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_menu_tb_producto" Association="Self.FK_tb_menu_tb_producto">
+            <End Role="tb_producto" EntitySet="tb_producto" />
+            <End Role="tb_menu" EntitySet="tb_menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_producto_tb_proveedor" Association="Self.FK_tb_producto_tb_proveedor">
+            <End Role="tb_proveedor" EntitySet="tb_proveedor" />
+            <End Role="tb_producto" EntitySet="tb_producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_producto_tb_sucursal" Association="Self.FK_tb_producto_tb_sucursal">
+            <End Role="tb_sucursal" EntitySet="tb_sucursal" />
+            <End Role="tb_producto" EntitySet="tb_producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_producto_tb_tipo_producto" Association="Self.FK_tb_producto_tb_tipo_producto">
+            <End Role="tb_tipo_producto" EntitySet="tb_tipo_producto" />
+            <End Role="tb_producto" EntitySet="tb_producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_proveedor_tb_sucursal" Association="Self.FK_tb_proveedor_tb_sucursal">
+            <End Role="tb_sucursal" EntitySet="tb_sucursal" />
+            <End Role="tb_proveedor" EntitySet="tb_proveedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_respuesta_encuesta_tb_encuesta" Association="Self.FK_tb_respuesta_encuesta_tb_encuesta">
+            <End Role="tb_encuesta" EntitySet="tb_encuesta" />
+            <End Role="tb_respuesta_encuesta" EntitySet="tb_respuesta_encuesta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_respuesta_encuesta_tb_pregunta_encuesta" Association="Self.FK_tb_respuesta_encuesta_tb_pregunta_encuesta">
+            <End Role="tb_pregunta_encuesta" EntitySet="tb_pregunta_encuesta" />
+            <End Role="tb_respuesta_encuesta" EntitySet="tb_respuesta_encuesta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_sucursal_tb_region" Association="Self.FK_tb_sucursal_tb_region">
+            <End Role="tb_region" EntitySet="tb_region" />
+            <End Role="tb_sucursal" EntitySet="tb_sucursal" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PolloVerdeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_cliente">
+          <Key>
+            <PropertyRef Name="id_cliente" />
+          </Key>
+          <Property Name="id_cliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nit_cliente" Type="Int32" Nullable="false" />
+          <Property Name="nombre_cliente" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="direccion_cliente" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_encuesta" Relationship="Self.FK_tb_encuesta_tb_cliente" FromRole="tb_cliente" ToRole="tb_encuesta" />
+          <NavigationProperty Name="tb_factura" Relationship="Self.FK_tb_factura_tb_cliente" FromRole="tb_cliente" ToRole="tb_factura" />
+        </EntityType>
+        <EntityType Name="tb_combo">
+          <Key>
+            <PropertyRef Name="id_combo" />
+          </Key>
+          <Property Name="id_combo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion_combo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_menu" Relationship="Self.FK_tb_menu_tb_combo" FromRole="tb_combo" ToRole="tb_menu" />
+        </EntityType>
+        <EntityType Name="tb_detalle_factura">
+          <Key>
+            <PropertyRef Name="id_detalle_factura" />
+          </Key>
+          <Property Name="id_detalle_factura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_factura" Type="Int32" Nullable="false" />
+          <Property Name="id_producto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_factura" Relationship="Self.FK_tb_detalle_factura_tb_factura" FromRole="tb_detalle_factura" ToRole="tb_factura" />
+          <NavigationProperty Name="tb_producto" Relationship="Self.FK_tb_detalle_factura_tb_producto" FromRole="tb_detalle_factura" ToRole="tb_producto" />
+          <Property Name="cantidad" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tb_encuesta">
+          <Key>
+            <PropertyRef Name="id_encuesta" />
+          </Key>
+          <Property Name="id_encuesta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha_encuesta" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="id_cliente" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_cliente" Relationship="Self.FK_tb_encuesta_tb_cliente" FromRole="tb_encuesta" ToRole="tb_cliente" />
+          <NavigationProperty Name="tb_respuesta_encuesta" Relationship="Self.FK_tb_respuesta_encuesta_tb_encuesta" FromRole="tb_encuesta" ToRole="tb_respuesta_encuesta" />
+        </EntityType>
+        <EntityType Name="tb_factura">
+          <Key>
+            <PropertyRef Name="id_factura" />
+          </Key>
+          <Property Name="id_factura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fecha_modificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="descuento_aplicado" Type="Int32" Nullable="false" />
+          <Property Name="id_tipo_pago" Type="Int32" Nullable="false" />
+          <Property Name="id_cliente" Type="Int32" Nullable="false" />
+          <Property Name="id_sucursal" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_cliente" Relationship="Self.FK_tb_factura_tb_cliente" FromRole="tb_factura" ToRole="tb_cliente" />
+          <NavigationProperty Name="tb_detalle_factura" Relationship="Self.FK_tb_detalle_factura_tb_factura" FromRole="tb_factura" ToRole="tb_detalle_factura" />
+          <NavigationProperty Name="tb_sucursal" Relationship="Self.FK_tb_factura_tb_sucursal" FromRole="tb_factura" ToRole="tb_sucursal" />
+          <NavigationProperty Name="tb_tipo_pago" Relationship="Self.FK_tb_factura_tb_tipo_pago" FromRole="tb_factura" ToRole="tb_tipo_pago" />
+        </EntityType>
+        <EntityType Name="tb_menu">
+          <Key>
+            <PropertyRef Name="id_menu" />
+          </Key>
+          <Property Name="id_menu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion_menu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_producto" Type="Int32" Nullable="false" />
+          <Property Name="id_combo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_combo" Relationship="Self.FK_tb_menu_tb_combo" FromRole="tb_menu" ToRole="tb_combo" />
+          <NavigationProperty Name="tb_producto" Relationship="Self.FK_tb_menu_tb_producto" FromRole="tb_menu" ToRole="tb_producto" />
+        </EntityType>
+        <EntityType Name="tb_pregunta_encuesta">
+          <Key>
+            <PropertyRef Name="id_pregunta_encuesta" />
+          </Key>
+          <Property Name="id_pregunta_encuesta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion_pregunta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_respuesta_encuesta" Relationship="Self.FK_tb_respuesta_encuesta_tb_pregunta_encuesta" FromRole="tb_pregunta_encuesta" ToRole="tb_respuesta_encuesta" />
+        </EntityType>
+        <EntityType Name="tb_producto">
+          <Key>
+            <PropertyRef Name="id_producto" />
+          </Key>
+          <Property Name="id_producto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_producto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion_producto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="precio_producto" Type="Int32" Nullable="false" />
+          <Property Name="cantidad_producto" Type="Int32" Nullable="false" />
+          <Property Name="id_tipo_producto" Type="Int32" Nullable="false" />
+          <Property Name="id_proveedor" Type="Int32" Nullable="false" />
+          <Property Name="id_sucursal" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_detalle_factura" Relationship="Self.FK_tb_detalle_factura_tb_producto" FromRole="tb_producto" ToRole="tb_detalle_factura" />
+          <NavigationProperty Name="tb_menu" Relationship="Self.FK_tb_menu_tb_producto" FromRole="tb_producto" ToRole="tb_menu" />
+          <NavigationProperty Name="tb_proveedor" Relationship="Self.FK_tb_producto_tb_proveedor" FromRole="tb_producto" ToRole="tb_proveedor" />
+          <NavigationProperty Name="tb_sucursal" Relationship="Self.FK_tb_producto_tb_sucursal" FromRole="tb_producto" ToRole="tb_sucursal" />
+          <NavigationProperty Name="tb_tipo_producto" Relationship="Self.FK_tb_producto_tb_tipo_producto" FromRole="tb_producto" ToRole="tb_tipo_producto" />
+        </EntityType>
+        <EntityType Name="tb_proveedor">
+          <Key>
+            <PropertyRef Name="id_proveedor" />
+          </Key>
+          <Property Name="id_proveedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_proveedor" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefono_proveedor" Type="Int32" Nullable="false" />
+          <Property Name="direccion_proveedor" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_sucursal" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_producto" Relationship="Self.FK_tb_producto_tb_proveedor" FromRole="tb_proveedor" ToRole="tb_producto" />
+          <NavigationProperty Name="tb_sucursal" Relationship="Self.FK_tb_proveedor_tb_sucursal" FromRole="tb_proveedor" ToRole="tb_sucursal" />
+        </EntityType>
+        <EntityType Name="tb_region">
+          <Key>
+            <PropertyRef Name="id_region" />
+          </Key>
+          <Property Name="id_region" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_region" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_sucursal" Relationship="Self.FK_tb_sucursal_tb_region" FromRole="tb_region" ToRole="tb_sucursal" />
+        </EntityType>
+        <EntityType Name="tb_respuesta_encuesta">
+          <Key>
+            <PropertyRef Name="id_respuesta_encuesta" />
+          </Key>
+          <Property Name="id_respuesta_encuesta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion_respuesta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_encuesta" Type="Int32" Nullable="false" />
+          <Property Name="id_pregunta_encuesta" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_encuesta" Relationship="Self.FK_tb_respuesta_encuesta_tb_encuesta" FromRole="tb_respuesta_encuesta" ToRole="tb_encuesta" />
+          <NavigationProperty Name="tb_pregunta_encuesta" Relationship="Self.FK_tb_respuesta_encuesta_tb_pregunta_encuesta" FromRole="tb_respuesta_encuesta" ToRole="tb_pregunta_encuesta" />
+        </EntityType>
+        <EntityType Name="tb_sucursal">
+          <Key>
+            <PropertyRef Name="id_sucursal" />
+          </Key>
+          <Property Name="id_sucursal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion_sucursal" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_region" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_factura" Relationship="Self.FK_tb_factura_tb_sucursal" FromRole="tb_sucursal" ToRole="tb_factura" />
+          <NavigationProperty Name="tb_producto" Relationship="Self.FK_tb_producto_tb_sucursal" FromRole="tb_sucursal" ToRole="tb_producto" />
+          <NavigationProperty Name="tb_proveedor" Relationship="Self.FK_tb_proveedor_tb_sucursal" FromRole="tb_sucursal" ToRole="tb_proveedor" />
+          <NavigationProperty Name="tb_region" Relationship="Self.FK_tb_sucursal_tb_region" FromRole="tb_sucursal" ToRole="tb_region" />
+        </EntityType>
+        <EntityType Name="tb_tipo_pago">
+          <Key>
+            <PropertyRef Name="id_tipo_pago" />
+          </Key>
+          <Property Name="id_tipo_pago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion_tipo_pago" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_factura" Relationship="Self.FK_tb_factura_tb_tipo_pago" FromRole="tb_tipo_pago" ToRole="tb_factura" />
+        </EntityType>
+        <EntityType Name="tb_tipo_producto">
+          <Key>
+            <PropertyRef Name="id_tipo_producto" />
+          </Key>
+          <Property Name="id_tipo_producto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion_tipo_producto" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_producto" Relationship="Self.FK_tb_producto_tb_tipo_producto" FromRole="tb_tipo_producto" ToRole="tb_producto" />
+        </EntityType>
+        <Association Name="FK_tb_encuesta_tb_cliente">
+          <End Role="tb_cliente" Type="Self.tb_cliente" Multiplicity="1" />
+          <End Role="tb_encuesta" Type="Self.tb_encuesta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_cliente">
+              <PropertyRef Name="id_cliente" />
+            </Principal>
+            <Dependent Role="tb_encuesta">
+              <PropertyRef Name="id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_factura_tb_cliente">
+          <End Role="tb_cliente" Type="Self.tb_cliente" Multiplicity="1" />
+          <End Role="tb_factura" Type="Self.tb_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_cliente">
+              <PropertyRef Name="id_cliente" />
+            </Principal>
+            <Dependent Role="tb_factura">
+              <PropertyRef Name="id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_menu_tb_combo">
+          <End Role="tb_combo" Type="Self.tb_combo" Multiplicity="1" />
+          <End Role="tb_menu" Type="Self.tb_menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_combo">
+              <PropertyRef Name="id_combo" />
+            </Principal>
+            <Dependent Role="tb_menu">
+              <PropertyRef Name="id_combo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_detalle_factura_tb_factura">
+          <End Role="tb_factura" Type="Self.tb_factura" Multiplicity="1" />
+          <End Role="tb_detalle_factura" Type="Self.tb_detalle_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_factura">
+              <PropertyRef Name="id_factura" />
+            </Principal>
+            <Dependent Role="tb_detalle_factura">
+              <PropertyRef Name="id_factura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_detalle_factura_tb_producto">
+          <End Role="tb_producto" Type="Self.tb_producto" Multiplicity="1" />
+          <End Role="tb_detalle_factura" Type="Self.tb_detalle_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_producto">
+              <PropertyRef Name="id_producto" />
+            </Principal>
+            <Dependent Role="tb_detalle_factura">
+              <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_respuesta_encuesta_tb_encuesta">
+          <End Role="tb_encuesta" Type="Self.tb_encuesta" Multiplicity="1" />
+          <End Role="tb_respuesta_encuesta" Type="Self.tb_respuesta_encuesta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_encuesta">
+              <PropertyRef Name="id_encuesta" />
+            </Principal>
+            <Dependent Role="tb_respuesta_encuesta">
+              <PropertyRef Name="id_encuesta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_factura_tb_sucursal">
+          <End Role="tb_sucursal" Type="Self.tb_sucursal" Multiplicity="1" />
+          <End Role="tb_factura" Type="Self.tb_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_sucursal">
+              <PropertyRef Name="id_sucursal" />
+            </Principal>
+            <Dependent Role="tb_factura">
+              <PropertyRef Name="id_sucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_factura_tb_tipo_pago">
+          <End Role="tb_tipo_pago" Type="Self.tb_tipo_pago" Multiplicity="1" />
+          <End Role="tb_factura" Type="Self.tb_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_tipo_pago">
+              <PropertyRef Name="id_tipo_pago" />
+            </Principal>
+            <Dependent Role="tb_factura">
+              <PropertyRef Name="id_tipo_pago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_menu_tb_producto">
+          <End Role="tb_producto" Type="Self.tb_producto" Multiplicity="1" />
+          <End Role="tb_menu" Type="Self.tb_menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_producto">
+              <PropertyRef Name="id_producto" />
+            </Principal>
+            <Dependent Role="tb_menu">
+              <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_respuesta_encuesta_tb_pregunta_encuesta">
+          <End Role="tb_pregunta_encuesta" Type="Self.tb_pregunta_encuesta" Multiplicity="1" />
+          <End Role="tb_respuesta_encuesta" Type="Self.tb_respuesta_encuesta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_pregunta_encuesta">
+              <PropertyRef Name="id_pregunta_encuesta" />
+            </Principal>
+            <Dependent Role="tb_respuesta_encuesta">
+              <PropertyRef Name="id_pregunta_encuesta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_producto_tb_proveedor">
+          <End Role="tb_proveedor" Type="Self.tb_proveedor" Multiplicity="1" />
+          <End Role="tb_producto" Type="Self.tb_producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_proveedor">
+              <PropertyRef Name="id_proveedor" />
+            </Principal>
+            <Dependent Role="tb_producto">
+              <PropertyRef Name="id_proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_producto_tb_sucursal">
+          <End Role="tb_sucursal" Type="Self.tb_sucursal" Multiplicity="1" />
+          <End Role="tb_producto" Type="Self.tb_producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_sucursal">
+              <PropertyRef Name="id_sucursal" />
+            </Principal>
+            <Dependent Role="tb_producto">
+              <PropertyRef Name="id_sucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_producto_tb_tipo_producto">
+          <End Role="tb_tipo_producto" Type="Self.tb_tipo_producto" Multiplicity="1" />
+          <End Role="tb_producto" Type="Self.tb_producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_tipo_producto">
+              <PropertyRef Name="id_tipo_producto" />
+            </Principal>
+            <Dependent Role="tb_producto">
+              <PropertyRef Name="id_tipo_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_proveedor_tb_sucursal">
+          <End Role="tb_sucursal" Type="Self.tb_sucursal" Multiplicity="1" />
+          <End Role="tb_proveedor" Type="Self.tb_proveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_sucursal">
+              <PropertyRef Name="id_sucursal" />
+            </Principal>
+            <Dependent Role="tb_proveedor">
+              <PropertyRef Name="id_sucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_sucursal_tb_region">
+          <End Role="tb_region" Type="Self.tb_region" Multiplicity="1" />
+          <End Role="tb_sucursal" Type="Self.tb_sucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_region">
+              <PropertyRef Name="id_region" />
+            </Principal>
+            <Dependent Role="tb_sucursal">
+              <PropertyRef Name="id_region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PolloVerdeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_cliente" EntityType="Self.tb_cliente" />
+          <EntitySet Name="tb_combo" EntityType="Self.tb_combo" />
+          <EntitySet Name="tb_detalle_factura" EntityType="Self.tb_detalle_factura" />
+          <EntitySet Name="tb_encuesta" EntityType="Self.tb_encuesta" />
+          <EntitySet Name="tb_factura" EntityType="Self.tb_factura" />
+          <EntitySet Name="tb_menu" EntityType="Self.tb_menu" />
+          <EntitySet Name="tb_pregunta_encuesta" EntityType="Self.tb_pregunta_encuesta" />
+          <EntitySet Name="tb_producto" EntityType="Self.tb_producto" />
+          <EntitySet Name="tb_proveedor" EntityType="Self.tb_proveedor" />
+          <EntitySet Name="tb_region" EntityType="Self.tb_region" />
+          <EntitySet Name="tb_respuesta_encuesta" EntityType="Self.tb_respuesta_encuesta" />
+          <EntitySet Name="tb_sucursal" EntityType="Self.tb_sucursal" />
+          <EntitySet Name="tb_tipo_pago" EntityType="Self.tb_tipo_pago" />
+          <EntitySet Name="tb_tipo_producto" EntityType="Self.tb_tipo_producto" />
+          <AssociationSet Name="FK_tb_encuesta_tb_cliente" Association="Self.FK_tb_encuesta_tb_cliente">
+            <End Role="tb_cliente" EntitySet="tb_cliente" />
+            <End Role="tb_encuesta" EntitySet="tb_encuesta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_factura_tb_cliente" Association="Self.FK_tb_factura_tb_cliente">
+            <End Role="tb_cliente" EntitySet="tb_cliente" />
+            <End Role="tb_factura" EntitySet="tb_factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_menu_tb_combo" Association="Self.FK_tb_menu_tb_combo">
+            <End Role="tb_combo" EntitySet="tb_combo" />
+            <End Role="tb_menu" EntitySet="tb_menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_detalle_factura_tb_factura" Association="Self.FK_tb_detalle_factura_tb_factura">
+            <End Role="tb_factura" EntitySet="tb_factura" />
+            <End Role="tb_detalle_factura" EntitySet="tb_detalle_factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_detalle_factura_tb_producto" Association="Self.FK_tb_detalle_factura_tb_producto">
+            <End Role="tb_producto" EntitySet="tb_producto" />
+            <End Role="tb_detalle_factura" EntitySet="tb_detalle_factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_respuesta_encuesta_tb_encuesta" Association="Self.FK_tb_respuesta_encuesta_tb_encuesta">
+            <End Role="tb_encuesta" EntitySet="tb_encuesta" />
+            <End Role="tb_respuesta_encuesta" EntitySet="tb_respuesta_encuesta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_factura_tb_sucursal" Association="Self.FK_tb_factura_tb_sucursal">
+            <End Role="tb_sucursal" EntitySet="tb_sucursal" />
+            <End Role="tb_factura" EntitySet="tb_factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_factura_tb_tipo_pago" Association="Self.FK_tb_factura_tb_tipo_pago">
+            <End Role="tb_tipo_pago" EntitySet="tb_tipo_pago" />
+            <End Role="tb_factura" EntitySet="tb_factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_menu_tb_producto" Association="Self.FK_tb_menu_tb_producto">
+            <End Role="tb_producto" EntitySet="tb_producto" />
+            <End Role="tb_menu" EntitySet="tb_menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_respuesta_encuesta_tb_pregunta_encuesta" Association="Self.FK_tb_respuesta_encuesta_tb_pregunta_encuesta">
+            <End Role="tb_pregunta_encuesta" EntitySet="tb_pregunta_encuesta" />
+            <End Role="tb_respuesta_encuesta" EntitySet="tb_respuesta_encuesta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_producto_tb_proveedor" Association="Self.FK_tb_producto_tb_proveedor">
+            <End Role="tb_proveedor" EntitySet="tb_proveedor" />
+            <End Role="tb_producto" EntitySet="tb_producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_producto_tb_sucursal" Association="Self.FK_tb_producto_tb_sucursal">
+            <End Role="tb_sucursal" EntitySet="tb_sucursal" />
+            <End Role="tb_producto" EntitySet="tb_producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_producto_tb_tipo_producto" Association="Self.FK_tb_producto_tb_tipo_producto">
+            <End Role="tb_tipo_producto" EntitySet="tb_tipo_producto" />
+            <End Role="tb_producto" EntitySet="tb_producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_proveedor_tb_sucursal" Association="Self.FK_tb_proveedor_tb_sucursal">
+            <End Role="tb_sucursal" EntitySet="tb_sucursal" />
+            <End Role="tb_proveedor" EntitySet="tb_proveedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_sucursal_tb_region" Association="Self.FK_tb_sucursal_tb_region">
+            <End Role="tb_region" EntitySet="tb_region" />
+            <End Role="tb_sucursal" EntitySet="tb_sucursal" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PolloVerdeModelStoreContainer" CdmEntityContainer="PolloVerdeEntities">
+          <EntitySetMapping Name="tb_cliente">
+            <EntityTypeMapping TypeName="PolloVerdeModel.tb_cliente">
+              <MappingFragment StoreEntitySet="tb_cliente">
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+                <ScalarProperty Name="nit_cliente" ColumnName="nit_cliente" />
+                <ScalarProperty Name="nombre_cliente" ColumnName="nombre_cliente" />
+                <ScalarProperty Name="direccion_cliente" ColumnName="direccion_cliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_combo">
+            <EntityTypeMapping TypeName="PolloVerdeModel.tb_combo">
+              <MappingFragment StoreEntitySet="tb_combo">
+                <ScalarProperty Name="id_combo" ColumnName="id_combo" />
+                <ScalarProperty Name="descripcion_combo" ColumnName="descripcion_combo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_detalle_factura">
+            <EntityTypeMapping TypeName="PolloVerdeModel.tb_detalle_factura">
+              <MappingFragment StoreEntitySet="tb_detalle_factura">
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="id_detalle_factura" ColumnName="id_detalle_factura" />
+                <ScalarProperty Name="id_factura" ColumnName="id_factura" />
+                <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_encuesta">
+            <EntityTypeMapping TypeName="PolloVerdeModel.tb_encuesta">
+              <MappingFragment StoreEntitySet="tb_encuesta">
+                <ScalarProperty Name="id_encuesta" ColumnName="id_encuesta" />
+                <ScalarProperty Name="fecha_encuesta" ColumnName="fecha_encuesta" />
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_factura">
+            <EntityTypeMapping TypeName="PolloVerdeModel.tb_factura">
+              <MappingFragment StoreEntitySet="tb_factura">
+                <ScalarProperty Name="id_factura" ColumnName="id_factura" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+                <ScalarProperty Name="fecha_modificacion" ColumnName="fecha_modificacion" />
+                <ScalarProperty Name="descuento_aplicado" ColumnName="descuento_aplicado" />
+                <ScalarProperty Name="id_tipo_pago" ColumnName="id_tipo_pago" />
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+                <ScalarProperty Name="id_sucursal" ColumnName="id_sucursal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_menu">
+            <EntityTypeMapping TypeName="PolloVerdeModel.tb_menu">
+              <MappingFragment StoreEntitySet="tb_menu">
+                <ScalarProperty Name="id_menu" ColumnName="id_menu" />
+                <ScalarProperty Name="descripcion_menu" ColumnName="descripcion_menu" />
+                <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+                <ScalarProperty Name="id_combo" ColumnName="id_combo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_pregunta_encuesta">
+            <EntityTypeMapping TypeName="PolloVerdeModel.tb_pregunta_encuesta">
+              <MappingFragment StoreEntitySet="tb_pregunta_encuesta">
+                <ScalarProperty Name="id_pregunta_encuesta" ColumnName="id_pregunta_encuesta" />
+                <ScalarProperty Name="descripcion_pregunta" ColumnName="descripcion_pregunta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_producto">
+            <EntityTypeMapping TypeName="PolloVerdeModel.tb_producto">
+              <MappingFragment StoreEntitySet="tb_producto">
+                <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+                <ScalarProperty Name="nombre_producto" ColumnName="nombre_producto" />
+                <ScalarProperty Name="descripcion_producto" ColumnName="descripcion_producto" />
+                <ScalarProperty Name="precio_producto" ColumnName="precio_producto" />
+                <ScalarProperty Name="cantidad_producto" ColumnName="cantidad_producto" />
+                <ScalarProperty Name="id_tipo_producto" ColumnName="id_tipo_producto" />
+                <ScalarProperty Name="id_proveedor" ColumnName="id_proveedor" />
+                <ScalarProperty Name="id_sucursal" ColumnName="id_sucursal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_proveedor">
+            <EntityTypeMapping TypeName="PolloVerdeModel.tb_proveedor">
+              <MappingFragment StoreEntitySet="tb_proveedor">
+                <ScalarProperty Name="id_proveedor" ColumnName="id_proveedor" />
+                <ScalarProperty Name="nombre_proveedor" ColumnName="nombre_proveedor" />
+                <ScalarProperty Name="telefono_proveedor" ColumnName="telefono_proveedor" />
+                <ScalarProperty Name="direccion_proveedor" ColumnName="direccion_proveedor" />
+                <ScalarProperty Name="id_sucursal" ColumnName="id_sucursal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_region">
+            <EntityTypeMapping TypeName="PolloVerdeModel.tb_region">
+              <MappingFragment StoreEntitySet="tb_region">
+                <ScalarProperty Name="id_region" ColumnName="id_region" />
+                <ScalarProperty Name="nombre_region" ColumnName="nombre_region" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_respuesta_encuesta">
+            <EntityTypeMapping TypeName="PolloVerdeModel.tb_respuesta_encuesta">
+              <MappingFragment StoreEntitySet="tb_respuesta_encuesta">
+                <ScalarProperty Name="id_respuesta_encuesta" ColumnName="id_respuesta_encuesta" />
+                <ScalarProperty Name="descripcion_respuesta" ColumnName="descripcion_respuesta" />
+                <ScalarProperty Name="id_encuesta" ColumnName="id_encuesta" />
+                <ScalarProperty Name="id_pregunta_encuesta" ColumnName="id_pregunta_encuesta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_sucursal">
+            <EntityTypeMapping TypeName="PolloVerdeModel.tb_sucursal">
+              <MappingFragment StoreEntitySet="tb_sucursal">
+                <ScalarProperty Name="id_sucursal" ColumnName="id_sucursal" />
+                <ScalarProperty Name="descripcion_sucursal" ColumnName="descripcion_sucursal" />
+                <ScalarProperty Name="id_region" ColumnName="id_region" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_tipo_pago">
+            <EntityTypeMapping TypeName="PolloVerdeModel.tb_tipo_pago">
+              <MappingFragment StoreEntitySet="tb_tipo_pago">
+                <ScalarProperty Name="id_tipo_pago" ColumnName="id_tipo_pago" />
+                <ScalarProperty Name="descripcion_tipo_pago" ColumnName="descripcion_tipo_pago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_tipo_producto">
+            <EntityTypeMapping TypeName="PolloVerdeModel.tb_tipo_producto">
+              <MappingFragment StoreEntitySet="tb_tipo_producto">
+                <ScalarProperty Name="id_tipo_producto" ColumnName="id_tipo_producto" />
+                <ScalarProperty Name="descripcion_tipo_producto" ColumnName="descripcion_tipo_producto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
