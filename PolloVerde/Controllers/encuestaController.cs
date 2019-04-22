@@ -165,7 +165,7 @@ namespace PolloVerde.Controllers
                 });
 
 
-                tb_encuesta nuevaEncuestsa = new tb_encuesta() //Aqui solo dejas Encuesta nuevaEncuesta = new Encuesta(); yo lo puse asi porque las tenia en otra ubicacion
+                tb_encuesta nuevaEncuestsa = new tb_encuesta()
                 {
                     id_cliente = model.id_cliente,
                     fecha_encuesta = DateTime.Now,

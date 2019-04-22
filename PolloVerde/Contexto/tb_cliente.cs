@@ -11,7 +11,9 @@ namespace PolloVerde.Contexto
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class tb_cliente
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,7 +22,7 @@ namespace PolloVerde.Contexto
             this.tb_encuesta = new HashSet<tb_encuesta>();
             this.tb_factura = new HashSet<tb_factura>();
         }
-    
+
         public int id_cliente { get; set; }
         public int nit_cliente { get; set; }
         public string nombre_cliente { get; set; }
