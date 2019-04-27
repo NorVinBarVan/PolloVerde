@@ -1,10 +1,10 @@
-﻿@model IEnumerable<PolloVerde.Contexto.tb_factura>
+﻿@model IEnumerable<PolloVerde.Contexto.tb_tipo_pago>
 
 @{
-    ViewBag.Title = "Facturas Pollo Verde";
+    ViewBag.Title = "Tipo de Pago Pollo Verde";
 }
 
-<h2>FACTURACION POLLO VERDE</h2>
+<h2>TIPO DE PAGO</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -13,19 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.fecha_creacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.descuento_aplicado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.tb_cliente.nombre_cliente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.tb_sucursal.descripcion_sucursal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.tb_tipo_pago.descripcion_tipo_pago)
+                @Html.DisplayNameFor(model => model.descripcion_tipo_pago)
             </th>
             <th></th>
         </tr>
@@ -36,24 +24,12 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.fecha_creacion)
+                    @Html.DisplayFor(modelItem => item.descripcion_tipo_pago)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.descuento_aplicado)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.tb_cliente.nombre_cliente)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.tb_sucursal.descripcion_sucursal)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.tb_tipo_pago.descripcion_tipo_pago)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.id_factura }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.id_factura }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.id_factura })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id_tipo_pago }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.id_tipo_pago }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id_tipo_pago })
                 </td>
             </tr>
         }

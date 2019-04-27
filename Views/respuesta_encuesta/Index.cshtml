@@ -1,10 +1,10 @@
-﻿@model IEnumerable<PolloVerde.Contexto.tb_factura>
+﻿@model IEnumerable<PolloVerde.Contexto.tb_respuesta_encuesta>
 
 @{
-    ViewBag.Title = "Facturas Pollo Verde";
+    ViewBag.Title = "Respuestas Encuesta Pollo Verde";
 }
 
-<h2>FACTURACION POLLO VERDE</h2>
+<h2>RESPUESTAS PARA LA ENCUESTA</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -13,47 +13,36 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.fecha_creacion)
+                @Html.DisplayNameFor(model => model.descripcion_respuesta)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.descuento_aplicado)
+                @Html.DisplayNameFor(model => model.tb_encuesta.id_encuesta)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.tb_cliente.nombre_cliente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.tb_sucursal.descripcion_sucursal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.tb_tipo_pago.descripcion_tipo_pago)
+                @Html.DisplayNameFor(model => model.tb_pregunta_encuesta.descripcion_pregunta)
             </th>
             <th></th>
         </tr>
     </thead>
 
     <tbody>
+
         @foreach (var item in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.fecha_creacion)
+                    @Html.DisplayFor(modelItem => item.descripcion_respuesta)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.descuento_aplicado)
+                    @Html.DisplayFor(modelItem => item.tb_encuesta.id_encuesta)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.tb_cliente.nombre_cliente)
+                    @Html.DisplayFor(modelItem => item.tb_pregunta_encuesta.descripcion_pregunta)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.tb_sucursal.descripcion_sucursal)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.tb_tipo_pago.descripcion_tipo_pago)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.id_factura }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.id_factura }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.id_factura })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id_respuesta_encuesta }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.id_respuesta_encuesta }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id_respuesta_encuesta })
                 </td>
             </tr>
         }

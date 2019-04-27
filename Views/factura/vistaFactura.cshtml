@@ -1,0 +1,166 @@
+﻿
+@{
+    ViewBag.Title = "Agregar Facturas";
+}
+
+<h2>AGREGAR FACTURAS</h2><br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            @Html.DropDownList("idsucursal", ViewBag.id_sucursal as SelectList, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="col-md-4">
+            @Html.DropDownList("idcliente", ViewBag.id_cliente as SelectList, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="col-md-4">
+            @Html.DropDownList("idtipo", ViewBag.id_tipo_pago as SelectList, htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-4">
+            @Html.DropDownList("idproducto", ViewBag.productos as SelectList, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="col-md-4">
+            <input type="number" id="cantidad" name="cantidad" class="form-control" placeholder="Cantidad"/>
+        </div>
+        <div class="col-md-4">
+            <button id="agregar" value="Agregar" class="btn btn-info" onclick="agregar()">Agregar</button>
+        </div>
+    </div>
+    <br />
+    <div class="row text-justify">
+        <div class="col-md-4">
+            <button class="btn btn-success" onclick="guardar()">Guardar Factura</button>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col">
+            <table id="productos" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>DESCRIPCION</th>
+                        <th>PRECIO</th>
+                        <th>CANTIDAD</th>
+                        <th>SUBTOTAL</th>
+                    </tr>
+                </thead>
+                <tbody id="filas"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    
+    <script>
+
+        var productos = @Html.Raw(Json.Encode(ViewBag.items));
+
+        var items = [];
+
+        var valor = null;
+
+        agregar = function () {
+            var id = $('select[name=idproducto]').val();
+
+            var cantidad = document.getElementById('cantidad').value;
+
+            var producto = productos.find(x => x.id_producto == id);
+
+            producto.cantidad = document.getElementById('cantidad').value;
+
+            items.push(producto);
+
+            var fila = document.createElement('tr');
+            fila.setAttribute('id', `${producto.id_producto}`);
+            var col1 = document.createElement('td');
+            col1.append(producto.id_producto);
+            var col2 = document.createElement('td');
+            col2.append(producto.descripcion_producto);
+            var col3 = document.createElement('td');
+            col3.append(producto.precio_producto);
+            var col4 = document.createElement('td');
+            col4.append(cantidad);
+            var subtotal = (parseInt(producto.precio_producto) * parseInt(cantidad));
+            var col5 = document.createElement('td');
+            col5.append(subtotal);
+
+            var boton = document.createElement('button');
+            boton.innerText = 'Eliminar';
+            boton.value = producto.id_producto;
+
+            boton.addEventListener('click', function () {
+                filas.removeChild(document.getElementById(`${producto.id_producto}`));
+                var item = items.indexOf(producto);
+                items.splice(item, 1);
+               
+            });
+
+            boton.value = producto.id_producto;
+            var col6 = document.createElement('td');
+            col6.append(boton);
+
+            fila.appendChild(col1);
+            fila.appendChild(col2);
+            fila.appendChild(col3);
+            fila.appendChild(col4);
+            fila.appendChild(col5);
+            fila.appendChild(col6);
+            document.getElementById('filas').appendChild(fila);
+        }
+
+
+
+        guardar = function () {
+
+
+            if (typeof items == 'undefined' || items === null && items.length < 1) {
+                alert('Debe ingresar productos');
+                return;
+            }
+
+            var request = new XMLHttpRequest();
+            var objeto = new Object();
+
+          
+            objeto.idcliente = document.getElementById('idcliente').value;
+            objeto.idsucursal = document.getElementById('idsucursal').value;
+            objeto.idtipopago = document.getElementById('idtipo').value;
+            objeto.items = items;
+
+
+            request.onreadystatechange = function () {
+                if (request.readyState == 4) {
+                    valor = JSON.parse(request.response);
+                    var boton = document.createElement('a');
+                    boton.innerHTML = 'Descargar Factura';
+                    boton.href = `/Report/crearFactura?idfactura=${valor.id}`;
+                    boton.className = 'btn btn-danger';
+                    document.body.appendChild(boton);
+                }
+            }
+
+            request.open('POST', '/factura/nuevaFactura', true);
+            request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+            request.send(JSON.stringify(objeto));
+
+            console.log(objeto);
+            
+
+            
+        }
+
+        
+
+        
+    </script>
+
+
+
+    
+    }
+

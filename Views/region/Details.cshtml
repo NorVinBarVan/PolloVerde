@@ -1,0 +1,26 @@
+﻿@model PolloVerde.Contexto.tb_region
+
+@{
+    ViewBag.Title = "Detalles Región";
+}
+
+<h2>DETALLE POR REGIÓN DE POLLO VERDE</h2>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre_region)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre_region)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("EDITAR", "Edit", new { id = Model.id_region }) |
+    @Html.ActionLink("REGRESAR", "Index")
+</p>

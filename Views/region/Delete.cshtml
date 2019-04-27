@@ -1,0 +1,32 @@
+﻿@model PolloVerde.Contexto.tb_region
+
+@{
+    ViewBag.Title = "Eliminar Región";
+}
+
+<h2>ELIMINAR REGIONES DE POLLO VERDE</h2>
+
+<h3>¿ESTÁ SEGURO QUE DESEA ELIMINAR ESTA SUCURSAL?</h3>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre_region)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre_region)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("REGRESAR", "Index")
+        </div>
+    }
+</div>

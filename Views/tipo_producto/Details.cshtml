@@ -1,0 +1,26 @@
+﻿@model PolloVerde.Contexto.tb_tipo_producto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tb_tipo_producto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion_tipo_producto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion_tipo_producto)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_tipo_producto }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
